@@ -83,7 +83,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param employeeDTO
      * @return
      */
-    @Override
+
     public void save(EmployeeDTO employeeDTO) {
         System.out.println("当前线程id:" + Thread.currentThread().getId());
     Employee employee = new Employee();
@@ -115,7 +115,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param employeePageQueryDTO
      * @return
      */
-    @Override
+
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
         // select * from employee limit 0,10
         //分页查询
@@ -129,7 +129,19 @@ public class EmployeeServiceImpl implements EmployeeService {
         return new PageResult(total,records);
     }
 
+    /**
+     * 启用禁用员工
+     * @param status
+     * @param id
+     */
 
+    public void startOrStop(Integer status, Long id) {
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+        employeeMapper.Update(employee);
+    }
 
 
 }
